@@ -1,13 +1,16 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "U.S. Incarceration Trends"
+author: "Sukhman Dhillon"
+date: '2022-11-21'
 output: html_document
 ---
 
 ```{r echo=FALSE, eval=TRUE, message=FALSE}
 source("../source/a4-helpers.R")
 source("../source/analysis.R")
+library("tidyverse")
+library("dplyr")
+library("ggplot2")
 ```
 
 ## Abstract 
@@ -34,12 +37,54 @@ print(sum)
 ```
 
 ## Introduction 
-[TODO]
+This dataset describes many different aspects of people who have been incarcerated in the United States from 1970 – 2018 including race, gender, discharges, regions, and many more. Social issues such as whether some populations of people that belong to certain groups are being disproportionately incarcerated are in this dataset. This is a problem because it would show that there are issues with the justice system, such as systemic racism where Black populations are being incarcerated most.
+
+Direct stakeholders that are impacted by research into this dataset are people who are interested in learning whether systemic racism is taking place and what places specifically are contributing most to it. With this information, these stakeholders can improve policies regarding incarceration so that unfair trends are removed. Indirect stakeholders that impacted by research into this dataset could be racial groups that are being disproportionately discriminated in the justice system. This is because the change in policies that direct stakeholders can apply will affect the current trends so that these groups don’t feel unfairly treated.
+
+Central values that I need to engage is trust and community. This is because if incarceration trends between certain racial groups are unfair, trust in the justice system will decrease and create animosity between citizens and the laws. Community is a central value in increasing trust and thus decrease crime, so it is necessary for incarceration trends to show that certain populations aren’t being targeted more over others.
+
+Questions I answer in my report include:
+
+* How has the U.S. prison population changed from 1970 to 2018?
+* How has the U.S. prison population changed between certain states from 1970 to 2018?
+* How do jailed Black population of total jailed population compare by region in 2018?
+* How does the proportion of jailed Black population compare by state in 2018?
+
 
 ## Data Summary 
-[TODO]
+I looked into variables about the average population of Black people in jail, the state in which the highest average number of Black people being jailed is, as well the type of location that incarcerates the highest average number of people. I looked at all of these variables across the U.S. and specifically in 2018 to get sense of the most recent data. I learned that the average number of incarcerations daily of Black people in the U.S. in 2018 was `r black_2018`. This value tells us what the rate is with the most recent data available to help us compare it to previous years to show that this number has increased. The location with the highest average incarcerations daily of Black people in 2018 is `r find_state_black_2018`. This value tells us that a specific state has actually not had the most incarcerations but rather the national capital which is interesting. It can tell us that systemic racism arose there, where laws are created. Because the white house is also there, it isn't surprising that a lot of security and incarcerations take place. Finally, the Urban-Rural Classification with the largest average total population in jail daily in 2018 in the U.S. is `r type_of_area`. This helps us makes sense of the idea that Washington D.C. had the highest average incarceration rates of Black people because it is a place that has a large population with at least a million people. These values help show that there are trends between Black people being incarcerated and the location.
 
-[TODO ... other sections ... See Canvas for details]
+## Growth of the U.S. Prison Population
 
-_All the very best with your work!_
+```{r echo=FALSE}
+plot_jail_pop_for_us()
+```
+#### Caption:
 
+### Summary
+
+## Growth of Prison Population by State 
+
+line graph
+
+#### Caption:
+
+### Summary
+
+## Black vs. Total Jailed Population by Region (2018)
+
+```{r echo=FALSE, warning=FALSE}
+plot_region_inequality()
+```
+#### Caption:
+
+### Summary
+
+## Proportion of Black People Jailed by State (2018)
+
+```{r echo=FALSE, warning=FALSE}
+plot_geo_inequality()
+```
+#### Caption:
+
+### Summary
