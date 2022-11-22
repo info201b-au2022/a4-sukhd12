@@ -83,53 +83,26 @@ plot_jail_pop_for_us()
 ## Section 4  ---- 
 #----------------------------------------------------------------------------#
 # This function returns a data frame <that is suitable for visualization.> This function takes in a vector of states. 
+# states <- c()
 get_jail_pop_by_states <- function(states) {
-  # states <- c()
   the_statepop <- incarceration_df %>% 
-    group_by(year) %>%
-    filter(state == states) %>%
+    group_by(state, year) %>%
+    filter(state %in% states) %>%
     select(total_jail_pop) %>%
     summarize(total_jail_pop1 = sum(total_jail_pop, na.rm = TRUE))
   return(the_statepop)   
 }
-# View(get_jail_pop_by_states("WA"))
+# View(get_jail_pop_by_states(c("CA", "NE", "AL", "NY")))
 
 # This function returns <the chart.> This function: (1) Takes no parameters; and (2) Calls the get_year_jail_pop function
 plot_jail_pop_by_states <- function(states)  {
   graph1 <- ggplot(data = get_jail_pop_by_states(states)) +
-    geom_line(mapping = aes(x = year, y = total_jail_pop1, color = states)) +
+    geom_line(mapping = aes(x = year, y = total_jail_pop1, color = state)) +
     scale_y_continuous(labels = scales::comma) +
-    labs(title = "Increase of Jail Population by State (1970-2018)", x = "Year", y = "Total Jail Population")
+    labs(title = "Increase of Jail Population by State (1970-2018)", x = "Year", y = "Total Jail Population", color = "State")
   return(graph1)   
 }
-# plot_jail_pop_by_states("WA")
-
-
-
-
-
-get_jail_pop_by_states <- function(astates) {
-  # states <- c()
-  for (states in astates) {
-    the_statepop <- incarceration_df %>% 
-      group_by(year) %>%
-      filter(state == states) %>%
-      select(total_jail_pop) %>%
-      summarize(total_jail_pop1 = sum(total_jail_pop, na.rm = TRUE))
-  }
-  return(the_statepop)
-}
-# get_jail_pop_by_states(c("WA", "OR", "CA"))
-
-
-plot_jail_pop_by_states <- function(astates)  {
-  graph1 <- ggplot(data = get_jail_pop_by_states(states)) +
-    geom_line(mapping = aes(x = year, y = total_jail_pop1)) +
-    scale_y_continuous(labels = scales::comma) +
-    labs(title = "Increase of Jail Population by State (1970-2018)", x = "Year", y = "Total Jail Population")
-    return(graph1)   
-} 
-# plot_jail_pop_by_states(c("WA", "OR", "CA"))
+plot_jail_pop_by_states(c("CA", "NE", "AL", "NY"))
 #----------------------------------------------------------------------------#
 
 ## Section 5  ---- 
@@ -174,7 +147,7 @@ geo_inequality <- function() {
     select(state, prop) %>%
   return(the_ineq)   
 }
-(geo_inequality())
+# View(geo_inequality())
 
 # This function returns <the chart.> This function: (1) Takes no parameters; and (2) Calls the get_year_jail_pop function
 state_shape <- map_data("state") %>%

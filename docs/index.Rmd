@@ -14,27 +14,7 @@ library("ggplot2")
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
-
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
+With this dataset, the main question I plan on addressing is what are the trends that exist with incarceration rates in the U.S. from 1970 to 2018? From those trends, I am going to investigate if any reveal inequalities such incarcerating certain races more than others and if certain states or regions contribute most to that.
 
 ## Introduction 
 This dataset describes many different aspects of people who have been incarcerated in the United States from 1970 – 2018 including race, gender, discharges, regions, and many more. Social issues such as whether some populations of people that belong to certain groups are being disproportionately incarcerated are in this dataset. This is a problem because it would show that there are issues with the justice system, such as systemic racism where Black populations are being incarcerated most.
@@ -47,7 +27,7 @@ Questions I answer in my report include:
 
 * How has the U.S. prison population changed from 1970 to 2018?
 * How has the U.S. prison population changed between certain states from 1970 to 2018?
-* How do jailed Black population of total jailed population compare by region in 2018?
+* How do jailed Black population and total jailed population compare by region in 2018?
 * How does the proportion of jailed Black population compare by state in 2018?
 
 
@@ -59,32 +39,41 @@ I looked into variables about the average population of Black people in jail, th
 ```{r echo=FALSE}
 plot_jail_pop_for_us()
 ```
-#### Caption:
+
+#### Caption: Graph of the growth of total jailed population in the U.S. from 1970 to 2018.
 
 ### Summary
+The question I wanted to address was how has the U.S. prison population changed from 1970 to 2018? With this graph, the prison population across the U.S. can easily be seen by year. With this, the first obvious trend is that the prison population increased dramatically from around 1980 to around 2005. Before 1980, prison population was pretty constant but after around 2005, the prison population has begun to decrease slowly.
 
 ## Growth of Prison Population by State 
 
-line graph
+```{r echo=FALSE, message=FALSE}
+plot_jail_pop_by_states(c("CA", "NE", "AL", "NY"))
+```
 
-#### Caption:
+#### Caption: Graph of the growth of prison population by state from 1970 to 2018.
 
 ### Summary
+The question I wanted to address was how has the U.S. prison population changed between certain states from 1970 to 2018? For this question, I decided to look at four states: California, Nebraska, Alabama, and New York. I chose these states because I wanted to try to see what the differences in prison population growth was like between different parts of the country like from the west, east, middle, and south. The graph shows that California had the largest growth overall since 1970 while Nebraska has been quite steady over time. New York's trend began by growing but is now decreasing. Alabama had a small increase around 1990 and has stayed relevantly flat for the past few years.
 
 ## Black vs. Total Jailed Population by Region (2018)
 
 ```{r echo=FALSE, warning=FALSE}
 plot_region_inequality()
 ```
-#### Caption:
+
+#### Caption: Graph of the Black jailed population vs. the total jailed population by region in 2018.
 
 ### Summary
+The question I wanted to address was how do jailed Black population and total jailed population compare by region in 2018? In this graph, a more linear trend of points through the middle of the graph (where the slope would be around 1) would indicate that population of Black people in jail makes up almost the total jail population in a location. According to this graph, the blue points that represents the South follows this correlation between Black people in jail and the overall jail population the most. This means that compared to the other regions, the South tends to have Black people make up most of the jail population compared to other races. This indicates an inequality in incarcerations in the U.S. because the certain area one lives in the U.S. can affect whether a race is arrested at higher rates than others. In this graph, the purple points that represent the West has a much smaller population of Black people in jail that make up the total population. This shows that there's an inequality in the amount of Black people jailed based on region.
 
 ## Proportion of Black People Jailed by State (2018)
 
 ```{r echo=FALSE, warning=FALSE}
 plot_geo_inequality()
 ```
-#### Caption:
+
+#### Caption: Map of the proportion of Black people jailed by state in 2018.
 
 ### Summary
+The question I wanted to address was how does the proportion of jailed Black population compare by state in 2018? In this map, states with a brighter shade of red have a larger proportion of Black people in jail of the total jailed population in that state in 2018. According to this map, states in the South like Louisiana, Alabama, or Mississippi have the brightest shade of red or largest proportion of Black people jailed. States in the West like Oregon and California have a proportion of around 0.3 compared to the ones in the South of around 0.8. This indicates inequality because Black people that tend to live in the states in the South with a larger proportion may have a higher chance of being incarcerated compared to other states. This shows that there's an inequality in incarcerations in the U.S. because certain states have Black people make up more of their jail population than others.
