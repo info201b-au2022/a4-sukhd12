@@ -7,16 +7,6 @@ source("../source/a4-helpers.R")
 #----------------------------------------------------------------------------#
 # Simple queries for basic testing
 #----------------------------------------------------------------------------#
-# Return a simple string
-test_query1 <- function() {
-  return ("Hello world")
-}
-
-# Return a vector of numbers
-test_query2 <- function(num=6) {
-  v <- seq(1:num)
-  return(v)
-}
 
 ## Section 2  ---- 
 #----------------------------------------------------------------------------#
@@ -61,7 +51,7 @@ paste(find_state_black_2018)
 library("dplyr")
 library("ggplot2")
 #----------------------------------------------------------------------------#
-# This function returns a data frame <that is suitable for visualization.> This function takes no parameters. 
+# This function returns a data frame with the year and total jail population in the U.S. that year. This function takes no parameters. 
 get_year_jail_pop <- function() {
   the_totalpop <- incarceration_df %>% 
     group_by(year) %>%
@@ -70,7 +60,7 @@ return(the_totalpop)
 }
 # View(get_year_jail_pop())
 
-# This function returns <the chart.> This function: (1) Takes no parameters; and (2) Calls the get_year_jail_pop function
+# This function returns a bar graph. This function: (1) Takes no parameters; and (2) Calls the get_year_jail_pop() function.
 plot_jail_pop_for_us <- function()  {
   graph <- ggplot(data = get_year_jail_pop()) +
     geom_col(mapping = aes(x = year, y = total_jail_pop)) +
@@ -82,8 +72,7 @@ plot_jail_pop_for_us()
 
 ## Section 4  ---- 
 #----------------------------------------------------------------------------#
-# This function returns a data frame <that is suitable for visualization.> This function takes in a vector of states. 
-# states <- c()
+# This function returns a data frame with the states called and the total jail population for each year in that state. This function takes in a vector of states. 
 get_jail_pop_by_states <- function(states) {
   the_statepop <- incarceration_df %>% 
     group_by(state, year) %>%
@@ -94,7 +83,7 @@ get_jail_pop_by_states <- function(states) {
 }
 # View(get_jail_pop_by_states(c("CA", "NE", "AL", "NY")))
 
-# This function returns <the chart.> This function: (1) Takes no parameters; and (2) Calls the get_year_jail_pop function
+# This function returns the line graph. This function: (1) Takes in a vector of states; and (2) Calls the get_jail_pop_by_states() function.
 plot_jail_pop_by_states <- function(states)  {
   graph1 <- ggplot(data = get_jail_pop_by_states(states)) +
     geom_line(mapping = aes(x = year, y = total_jail_pop1, color = state)) +
@@ -107,6 +96,7 @@ plot_jail_pop_by_states(c("CA", "NE", "AL", "NY"))
 
 ## Section 5  ---- 
 #----------------------------------------------------------------------------#
+# This function returns a data frame with the jailed Black population, the total population, region, and state in 2018. This function takes no parameters. 
 region_inequality <- function() {
   the_inequality <- incarceration_df %>% 
     group_by(year) %>%
@@ -116,7 +106,7 @@ region_inequality <- function() {
 }
 # View(region_inequality())
 
-# This function returns <the chart.> This function: (1) Takes no parameters; and (2) Calls the get_year_jail_pop function
+# This function returns the scatterplot. This function: (1) Takes no parameters; and (2) Calls the region_inequality() function
 plot_region_inequality <- function()  {
   chart <- ggplot(data = region_inequality()) +
     geom_point(mapping = aes(x = black_jail_pop, y = total_jail_pop, color = region)) +
@@ -130,7 +120,6 @@ plot_region_inequality()
 
 ## Section 6  ---- 
 #----------------------------------------------------------------------------#
-# <a map shows potential patterns of inequality that vary geographically>
 full2 <- right_join(modified_df, state_code, by = "Code")
 # View(full2)
 fuller <- full2 %>%
@@ -138,6 +127,7 @@ fuller <- full2 %>%
   mutate(state = tolower(state))
 # View(fuller)
 
+# This function returns a data frame with each state and the proportion of Black people in jail out of the total population in jail in 2018. This function takes no parameters. 
 geo_inequality <- function() {
   the_ineq <- fuller %>% 
     filter(year == 2018) %>%
@@ -149,7 +139,7 @@ geo_inequality <- function() {
 }
 # View(geo_inequality())
 
-# This function returns <the chart.> This function: (1) Takes no parameters; and (2) Calls the get_year_jail_pop function
+# This function returns the map. This function: (1) Takes no parameters; and (2) Calls the geo_inequality() function.
 state_shape <- map_data("state") %>%
   rename(state = region) %>%
   left_join(geo_inequality(), by = "state")
@@ -178,5 +168,5 @@ plot_geo_inequality <- function() {
 }
 plot_geo_inequality()
 
-# source: I used the textbook (p. 250) to help me create my code for my map.
+# source: I used the textbook (p. 250) to help me create the code for my map.
 #----------------------------------------------------------------------------#
